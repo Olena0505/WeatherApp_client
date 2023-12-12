@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\AppIcon.png" />
+    <None Remove="Images\Cloud.png" />
+    <None Remove="Images\Clouds.png" />
+    <None Remove="Images\Humidity.png" />
+    <None Remove="Images\Location.png" />
+    <None Remove="Images\Moon.png" />
+    <None Remove="Images\PartlyCloudy.png" />
+    <None Remove="Images\PartlyCloudyDay.png" />
+    <None Remove="Images\PartlyCloudyNight.png" />
+    <None Remove="Images\Precipitation.png" />
+    <None Remove="Images\Rain.png" />
+    <None Remove="Images\Snow.png" />
+    <None Remove="Images\Sun.png" />
+    <None Remove="Images\Update.png" />
+    <None Remove="Images\Wind.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\AppIcon.png" />
+    <Resource Include="Images\Cloud.png" />
+    <Resource Include="Images\Clouds.png" />
+    <Resource Include="Images\Humidity.png" />
+    <Resource Include="Images\Location.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Moon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PartlyCloudyDay.png" />
+    <Resource Include="Images\PartlyCloudyNight.png" />
+    <Resource Include="Images\Precipitation.png" />
+    <Resource Include="Images\Rain.png" />
+    <Resource Include="Images\Snow.png" />
+    <Resource Include="Images\Sun.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Update.png" />
+    <Resource Include="Images\Wind.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Wether icons-->
+    <BitmapImage x:Key="AppIcon" UriSource="/Images/AppIcon.png"/>
+    <BitmapImage x:Key="Cloud" UriSource="/Images/Cloud.png"/>
+    <BitmapImage x:Key="Clouds" UriSource="/Images/Clouds.png"/>
+    <BitmapImage x:Key="Humidity" UriSource="/Images/Humidity.png"/>
+    <BitmapImage x:Key="Moon" UriSource="/Images/Moon.png"/>
+    <BitmapImage x:Key="Sun" UriSource="/Images/Sun.png"/>
+    <BitmapImage x:Key="PartlyCloudyDay" UriSource="/Images/PartlyCloudyDay.png"/>
+    <BitmapImage x:Key="PartlyCloudyNight" UriSource="/Images/PartlyCloudyNight.png"/>
+    <BitmapImage x:Key="Precipitation" UriSource="/Images/Precipitation.png"/>
+    <BitmapImage x:Key="Rain" UriSource="/Images/Rain.png"/>
+    <BitmapImage x:Key="Snow" UriSource="/Images/Snow.png"/>
+    <BitmapImage x:Key="Wind" UriSource="/Images/Wind.png"/>
+    
+    <!--Services icons-->
+    <BitmapImage x:Key="Update" UriSource="/Images/Update.png"/>
+    <BitmapImage x:Key="Location" UriSource="/Images/Location.png"/>
+
+</ResourceDictionary>
