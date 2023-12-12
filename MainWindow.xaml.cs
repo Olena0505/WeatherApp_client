@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WeatherApp.UserControls;
+using MaterialDesignThemes.Wpf;
 
 namespace WeatherApp
 {
@@ -47,6 +48,10 @@ namespace WeatherApp
             {
                 hourlyData.wind_speed_10m.Add(i);
             }
+            for (int i = 0; i < 10; i++)
+            {
+                hourlyData.weather_code.Add(i);
+            }
 
             PopulateWeatherCards();
         }
@@ -54,10 +59,14 @@ namespace WeatherApp
 
         private void PopulateWeatherCards()
         {
+            weatherStackPanel.Children.Clear();
+            bool isDay;
+
             if (hourlyData != null)
             {
                 for (int i = 0; i < 10; i++)
                 {
+                    isDay = (i > 5 && i < 7) ? true : false;
                     var card = new WeatherPerHourCard();
 
                     card.Hour = $"{i:D2}:00";
@@ -75,25 +84,44 @@ namespace WeatherApp
                         card.Wind = "N/A";
                     }
 
-                    string[] weatherConditions = new string[]
-                    {
-                        "PartlyCloudyDay", "PartlyCloudyNight", "Moon", "Clouds", "Sun"
-                    };
-
-                    if (i < weatherConditions.Length)
-                    {
-                        card.Source = (BitmapImage)FindResource(weatherConditions[i]);
-                    }
-                    else
-                    {
-                        card.Source = (BitmapImage)FindResource("PartlyCloudyDay");
-                    }
+                    card.Source = SetWeatherIcon(hourlyData.weather_code[i], isDay);
 
                     weatherStackPanel.Children.Add(card);
                 }
             }
         }
 
+        public BitmapImage SetWeatherIcon(int weatherCode, bool isDay)
+        {
+            if ((weatherCode == 0 || weatherCode == 1) && isDay)
+            {
+                return (BitmapImage)FindResource("Sun");
+            }
+            else if ((weatherCode == 0 || weatherCode == 1) && !isDay)
+            {
+                return (BitmapImage)FindResource("Moon");
+            }
+            else if (weatherCode == 2 && isDay)
+            {
+                return (BitmapImage)FindResource("PartlyCloudyDay");
+            }
+            else if (weatherCode == 2 && !isDay)
+            {
+                return (BitmapImage)FindResource("PartlyCloudyNight");
+            }
+            else if ((weatherCode > 50 && weatherCode < 70) || (weatherCode > 80 && weatherCode < 100))
+            {
+                return (BitmapImage)FindResource("Rain");
+            }
+            else if (weatherCode > 70 && weatherCode < 80)
+            {
+                return (BitmapImage)FindResource("Snow");
+            }
+            else
+            {
+                return (BitmapImage)FindResource("Clouds");
+            }
+        }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -117,12 +145,15 @@ namespace WeatherApp
         {
 
         }
-            private void btnUpdate_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            PopulateWeatherCards();
         }
         
     }
+
+    //Orest's code
 
     public class WeatherData
     {
