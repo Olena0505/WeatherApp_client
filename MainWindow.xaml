@@ -8,8 +8,8 @@
         mc:Ignorable="d" ResizeMode="CanMinimize"
         Title="Weather forecast" ShowInTaskbar="False"
         Height="450" Width="800" Foreground="AliceBlue"
-        Background="#FF030337"
-        WindowStartupLocation="CenterScreen" Icon="/Images/AppIcon.png" FontFamily="Segoe UI Variable Display Semibold">
+        Background="#FF030337" WindowStartupLocation="CenterScreen" 
+        Icon="/Images/AppIcon.png" FontFamily="Segoe UI Variable Display Semibold">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,38 +21,38 @@
         <!--Left side-->
         <Border CornerRadius="30 0 0 30" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <StackPanel Margin="20,20,20,20">
-                <Image Source="{StaticResource Moon}" Height="120" Width="120"/>
+                <Image x:Name="CurrentWeather_image" Height="120" Width="120"/>
 
-                <TextBlock Text="12°" FontSize="30" />
-                <TextBlock Text="Feels like 5°" FontSize="18"/>
-                <TextBlock Text="Mon, 21:36" FontSize="18" Margin="0 0 0 20"/>
-              
+                <TextBlock x:Name="Temperature_textBox" FontSize="30" />
+                <TextBlock x:Name="AppearentTemperature_textBox" FontSize="18"/>
+                <TextBlock x:Name="Date_textBox" Text="Mon, 21:36" FontSize="18" Margin="0 0 0 20"/>
+
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="219">
                     <Image Source="{StaticResource Cloud}"
                             Width="25" Margin="0 5 5 5" Height="25"/>
-                    <TextBlock Text="Mostly cloudly"
+                    <TextBlock x:Name="CloudCoverLevel_textBox"
                             FontSize="18" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="219">
                     <Image Source="{StaticResource Precipitation}" 
                             Width="25" Margin="0 5 5 5" Height="25"/>
-                    <TextBlock Text="Precipitation - 100%"
+                    <TextBlock x:Name="Precipitation_textBox"
                             FontSize="18" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="218">
                     <Image Source="{StaticResource Humidity}"
                             Width="25" Margin="0 5 5 5" Height="25"/>
-                    <TextBlock Text="Humidity - 100%"
+                    <TextBlock x:Name="Humidity_textBox"
                             FontSize="18" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="218">
                     <Image Source="{StaticResource Wind}"
                             Width="25" Margin="0 5 5 5" Height="25"/>
-                    <TextBlock Text="Wind speed - 20 km/h"
+                    <TextBlock x:Name="WindSpeed_textBox"
                             FontSize="18" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
@@ -62,7 +62,7 @@
         <Border CornerRadius="0 30 30 0" Grid.Column="2" Grid.RowSpan="2">
 
             <StackPanel Margin="0 0 25 0">
-                <Grid Margin="0 20 0 30">
+                <Grid Margin="0 20 0 35">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Menu>
                             <MenuItem x:Name="MainMenuItem" Foreground="White" FontSize="18" BorderThickness="0" 
@@ -79,13 +79,13 @@
                                 </MenuItem.HeaderTemplate>
 
                                 <MenuItem Header="Vinnytsia" FontSize="18" Click="MenuItem_Click" Width="190"/>
-                                <MenuItem Header="Rivne" FontSize="18" Click="MenuItem_Click" Width="190"/>
+                                <MenuItem Header="Varash" FontSize="18" Click="MenuItem_Click" Width="190"/>
                                 <MenuItem Header="Lviv" FontSize="18" Click="MenuItem_Click" Width="190" IsEnabled="False"/>
                             </MenuItem>
                         </Menu>
 
-                        <Button x:Name="btnUpdate" Width="130" Margin="185 0 0 0"
-                                Background="Transparent" Foreground="AliceBlue" BorderThickness="0" Click="btnUpdate_Click">
+                        <Button x:Name="btnUpdate" Width="140" Margin="170 0 0 0" BorderBrush="AliceBlue"
+                                Background="Transparent" Foreground="AliceBlue" BorderThickness="1.5" Click="btnUpdate_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{StaticResource Update}" VerticalAlignment="Center"
                                         Width="20" Height="20"/>
@@ -96,13 +96,18 @@
 
                     </StackPanel>
                 </Grid>
-
-
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Padding="0.005" Width="520">
-                    <StackPanel x:Name="weatherStackPanel" Orientation="Horizontal" Margin="0 20 0 20">
-                        
-                    </StackPanel>
+                
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Padding="0.005" Width="505">
+                    <StackPanel x:Name="weatherStackPanel" Orientation="Horizontal" Margin="0 0 0 20"/>
                 </ScrollViewer>
+                
+                <Button x:Name="btnSubscribe" Width="140" BorderBrush="AliceBlue" Margin="352 20 0 0"
+                        Background="Transparent" Foreground="AliceBlue" BorderThickness="1.5" Click="btnSubscribe_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Subscribe"
+                            FontSize="18" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                    </StackPanel>
+                </Button>
 
             </StackPanel>
         </Border>

@@ -15,6 +15,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WeatherApp.UserControls;
 using MaterialDesignThemes.Wpf;
+using System.Globalization;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace WeatherApp
 {
@@ -32,30 +35,62 @@ namespace WeatherApp
         }
 
         public HourlyData hourlyData = new HourlyData();
-        public HourlyUnits hourlyUnit = new HourlyUnits();
-
+        public bool isSubscribed;
+        public string location;
+        public bool isDayNow;
+        
         private void Start()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 24; i++)
             {
+                hourlyData.time.Add($"{i:D2}:00");
                 hourlyData.temperature_2m.Add(i);
-            }
-            for (int i = 0; i < 10; i++)
-            {
+                hourlyData.apparent_temperature.Add(i);
+                hourlyData.cloud_cover.Add(i * 5);
                 hourlyData.precipitation_probability.Add(i * 5);
-            }
-            for (int i = 0; i < 10; i++)
-            {
+                hourlyData.relative_humidity_2m.Add(i * 5);
                 hourlyData.wind_speed_10m.Add(i);
+                hourlyData.weather_code.Add(i+i*5);
             }
-            for (int i = 0; i < 10; i++)
-            {
-                hourlyData.weather_code.Add(i);
-            }
-
+            DefineCurrentWeather();
             PopulateWeatherCards();
         }
 
+        public void DefineCurrentWeather()
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                string givenTime = hourlyData.time[i];
+
+                DateTime currentTime = DateTime.Now;
+
+                if (DateTime.TryParseExact(givenTime, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedTime))
+                {
+                    int givenHour = parsedTime.Hour;
+
+                    if (currentTime.Hour == givenHour)
+                    {
+                        if (currentTime.Hour > 5 && currentTime.Hour < 7)
+                        {
+                            isDayNow = true;
+                        }
+                        SetCurrentWeather(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void SetCurrentWeather(int currentHourIndex)
+        {
+            CurrentWeather_image.Source = SetWeatherIcon(hourlyData.weather_code[currentHourIndex], isDayNow);
+            Temperature_textBox.Text = $"{hourlyData.temperature_2m[currentHourIndex]}°";
+            AppearentTemperature_textBox.Text = $"Feels like {hourlyData.apparent_temperature[currentHourIndex]}°";
+            CloudCoverLevel_textBox.Text = SetCloudCoverLevel(currentHourIndex);
+            Precipitation_textBox.Text = $"Precipitation - {hourlyData.precipitation_probability[currentHourIndex]}%";
+            Humidity_textBox.Text = $"Humidity - {hourlyData.relative_humidity_2m[currentHourIndex]}%";
+            WindSpeed_textBox.Text = $"Wind speed - {hourlyData.wind_speed_10m[currentHourIndex]} km/h";
+        }
 
         private void PopulateWeatherCards()
         {
@@ -64,7 +99,7 @@ namespace WeatherApp
 
             if (hourlyData != null)
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 24; i++)
                 {
                     isDay = (i > 5 && i < 7) ? true : false;
                     var card = new WeatherPerHourCard();
@@ -88,6 +123,21 @@ namespace WeatherApp
 
                     weatherStackPanel.Children.Add(card);
                 }
+            }
+        }
+
+        public string SetCloudCoverLevel(int CloudCoverLevel)
+        {
+            if (CloudCoverLevel <= 30)
+            {
+                return "Clear sky";
+            }
+            else if (CloudCoverLevel > 30 && CloudCoverLevel < 60)
+            {
+                return "Partly cloudy";
+            }
+            else {
+                return "Overcast";
             }
         }
 
@@ -137,23 +187,26 @@ namespace WeatherApp
             }
             if (sender is MenuItem clickedMenuItem)
             {
+                location = clickedMenuItem.Header?.ToString();
                 clickedMenuItem.IsEnabled = false;
             }
         }
 
-        private void Menu_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        private void Menu_Click(object sender, RoutedEventArgs e) { }
+ 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            DefineCurrentWeather();
             PopulateWeatherCards();
         }
-        
+
+        private void btnSubscribe_Click(object sender, RoutedEventArgs e)
+        {
+            isSubscribed = isSubscribed ? false : true;
+        }
     }
 
-    //Orest's code
+    //======================================= Orest's code
 
     public class WeatherData
     {
@@ -184,6 +237,19 @@ namespace WeatherApp
         public string weather_code { get; set; }
         public string cloud_cover { get; set; }
         public string wind_speed_10m { get; set; }
+
+        public HourlyUnits(string givenTime, double givenTemperature, int givenHumidity, double givenAppearTempereture,
+            int givenPrecipitation, int givenWeatherCode, int givenCloudCover, int givenWindSpeed)
+        {
+            time = givenTime;
+            temperature_2m = givenTemperature.ToString();
+            relative_humidity_2m = givenHumidity.ToString();
+            apparent_temperature = givenAppearTempereture.ToString();
+            precipitation_probability = givenPrecipitation.ToString();
+            weather_code = givenWeatherCode.ToString();
+            cloud_cover = givenCloudCover.ToString();
+            wind_speed_10m = givenWindSpeed.ToString();
+        }
 
         public override string ToString()
         {
