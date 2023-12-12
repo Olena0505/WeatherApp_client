@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WeatherApp.UserControls;
 using MaterialDesignThemes.Wpf;
-//
+
 namespace WeatherApp
 {
     /// <summary>
