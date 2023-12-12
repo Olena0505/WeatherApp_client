@@ -20,7 +20,7 @@
 
         <!--Left side-->
         <Border CornerRadius="30 0 0 30" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <StackPanel Margin="30 20 30 20">
+            <StackPanel Margin="20,20,20,20">
                 <Image Source="{StaticResource Moon}" Height="120" Width="120"/>
 
                 <TextBlock Text="12°" FontSize="30" />
@@ -28,31 +28,31 @@
                 <TextBlock Text="Mon, 21:36" FontSize="18" Margin="0 0 0 20"/>
               
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="199">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="219">
                     <Image Source="{StaticResource Cloud}"
                             Width="25" Margin="0 5 5 5" Height="25"/>
                     <TextBlock Text="Mostly cloudly"
                             FontSize="18" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="199">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="219">
                     <Image Source="{StaticResource Precipitation}" 
                             Width="25" Margin="0 5 5 5" Height="25"/>
-                    <TextBlock Text="Precipitation - "
+                    <TextBlock Text="Precipitation - 100%"
                             FontSize="18" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="199">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="218">
                     <Image Source="{StaticResource Humidity}"
                             Width="25" Margin="0 5 5 5" Height="25"/>
-                    <TextBlock Text="Humidity - "
+                    <TextBlock Text="Humidity - 100%"
                             FontSize="18" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="199">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="218">
                     <Image Source="{StaticResource Wind}"
                             Width="25" Margin="0 5 5 5" Height="25"/>
-                    <TextBlock Text="Wind speed - "
+                    <TextBlock Text="Wind speed - 20 km/h"
                             FontSize="18" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
@@ -61,11 +61,11 @@
         <!--Right side-->
         <Border CornerRadius="0 30 30 0" Grid.Column="2" Grid.RowSpan="2">
 
-            <StackPanel Margin="0,0,30,0">
+            <StackPanel Margin="0 0 25 0">
                 <Grid Margin="0 20 0 30">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Menu>
-                            <MenuItem x:Name="Menu" Header="Location" Foreground="White" FontSize="18" BorderThickness="0" 
+                            <MenuItem x:Name="MainMenuItem" Foreground="White" FontSize="18" BorderThickness="0" 
                                     FontWeight="Medium" Background="#FF030337" 
                                     Width="190" Height="40" Click="Menu_Click">
 
@@ -73,14 +73,14 @@
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="{StaticResource Location}" Width="25" Height="25" Margin="0 0 5 0"/>
-                                            <TextBlock Text="Lviv" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="HeaderTextBlock" Text="Lviv" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </MenuItem.HeaderTemplate>
 
                                 <MenuItem Header="Vinnytsia" FontSize="18" Click="MenuItem_Click" Width="190"/>
                                 <MenuItem Header="Rivne" FontSize="18" Click="MenuItem_Click" Width="190"/>
-                                <MenuItem Header="Lviv" FontSize="18" Click="MenuItem_Click" Width="190"/>
+                                <MenuItem Header="Lviv" FontSize="18" Click="MenuItem_Click" Width="190" IsEnabled="False"/>
                             </MenuItem>
                         </Menu>
 
@@ -97,34 +97,13 @@
                     </StackPanel>
                 </Grid>
 
+
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Padding="0.005" Width="520">
-                    <StackPanel Orientation="Horizontal" Margin="0 20 0 20">
-                        <uc:WeatherPerHourCard Hour="00:00" Source="{StaticResource PartlyCloudyNight}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="01:00" Source="{StaticResource Moon}" Temperature="4°" Precipitation="46%" Wind="8 km/h"/>
-                        <uc:WeatherPerHourCard Hour="02:00" Source="{StaticResource Clouds}" Temperature="5°" Precipitation="47%" Wind="9 km/h"/>
-                        <uc:WeatherPerHourCard Hour="03:00" Source="{StaticResource Moon}" Temperature="6°" Precipitation="48%" Wind="0 km/h"/>
-                        <uc:WeatherPerHourCard Hour="04:00" Source="{StaticResource Moon}" Temperature="7°" Precipitation="49%" Wind="1 km/h"/>
-                        <uc:WeatherPerHourCard Hour="05:00" Source="{StaticResource Moon}" Temperature="8°" Precipitation="40%" Wind="2 km/h"/>
-                        <uc:WeatherPerHourCard Hour="06:00" Source="{StaticResource Moon}" Temperature="9°" Precipitation="41%" Wind="3 km/h"/>
-                        <uc:WeatherPerHourCard Hour="07:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="08:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="09:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="10:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="11:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="12:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="13:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="14:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="15:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="16:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="17:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="18:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="19:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="20:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="21:00" Source="{StaticResource Sun}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="22:00" Source="{StaticResource Moon}" Temperature="3°" Precipitation="45%" Wind="7 km/h"/>
-                        <uc:WeatherPerHourCard Hour="23:00" Source="{StaticResource Moon}" Temperature="10°" Precipitation="42%" Wind="4 km/h" Margin="0 0 15 0"/>
+                    <StackPanel x:Name="weatherStackPanel" Orientation="Horizontal" Margin="0 20 0 20">
+                        
                     </StackPanel>
                 </ScrollViewer>
+
             </StackPanel>
         </Border>
 
